@@ -1,5 +1,4 @@
 import { useState } from "react";
-import BottomNavigationMenu from "@components/fragments/BottomNavigationBar/BottomNavigationMenu";
 import Typography from "@components/ui/Typography/Typography";
 import styles from "@styles/pages/Home.module.scss";
 import classNames from "classnames";
@@ -12,9 +11,9 @@ import chestAnimation from "@public/animations/chest-animation.json";
 
 export default function Home() {
   const [selected, setSelected] = useState<number>(-1);
-  const { question, isFetchingQuestions } = useGetQuestionsByLevel(1);
   const [correct, setCorrect] = useState<boolean | null>(null);
   const [reveal, setReveal] = useState<boolean>(false);
+  const { question, isFetchingQuestions } = useGetQuestionsByLevel(1);
   // const provider = useEthersProvider();
 
   const handleResponse = async () => {
@@ -76,7 +75,6 @@ export default function Home() {
           {correct && <Lottie animationData={chestAnimation} />}
         </div>
       </div>
-      <BottomNavigationMenu />
     </div>
   );
 }

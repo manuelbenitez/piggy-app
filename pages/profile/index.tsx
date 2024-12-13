@@ -14,9 +14,9 @@ const ProfilePage = () => {
     return address.slice(0, 6) + "..." + address.slice(-4);
   }
 
-  console.log(zksyncSepoliaTestnet.blockExplorers);
-  console.log(zksyncSepoliaTestnet.rpcUrls.default.http);
-  console.log(address);
+  // console.log(zksyncSepoliaTestnet.blockExplorers);
+  // console.log(zksyncSepoliaTestnet.rpcUrls.default.http);
+  // console.log(address);
   return (
     <div className={styles.container}>
       <Typography text={"Perfil de ..."} type={"h1"} />
