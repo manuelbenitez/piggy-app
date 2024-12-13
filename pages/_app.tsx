@@ -10,7 +10,6 @@ export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
   const [visible, setVisible] = useState<boolean>(false);
   useEffect(() => {
-    console.log(router.pathname);
     if (router.pathname === "/login") {
       setVisible(false);
     } else {
