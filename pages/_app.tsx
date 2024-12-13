@@ -3,14 +3,26 @@ import "@styles/styles.scss";
 import BottomNavigationMenu from "@components/fragments/BottomNavigationBar/BottomNavigationMenu";
 import TopBar from "@components/fragments/TopBar/TopBar";
 import Web3ModalProvider from "../context";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 
 export default function App({ Component, pageProps }: AppProps) {
+  const router = useRouter();
+  const [visible, setVisible] = useState<boolean>(false);
+  useEffect(() => {
+    console.log(router.pathname);
+    if (router.pathname === "/login") {
+      setVisible(false);
+    } else {
+      setVisible(true);
+    }
+  }, [router.pathname]);
   return (
     <>
       <Web3ModalProvider>
-        <TopBar />
+        {visible && <TopBar />}
         <Component {...pageProps} />
-        <BottomNavigationMenu />
+        {visible && <BottomNavigationMenu />}
       </Web3ModalProvider>
     </>
   );

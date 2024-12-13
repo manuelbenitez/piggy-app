@@ -63,7 +63,8 @@ export default function Home() {
               <Button
                 text={"Responder"}
                 type={"blue"}
-                size={"small"}
+                size={"main"}
+                disabled={selected === -1}
                 onClick={() => handleResponse()}
               />
             </>

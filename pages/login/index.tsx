@@ -1,24 +1,24 @@
 import Button from "@components/ui/Button/Button";
-import React, { useEffect } from "react";
+import React from "react";
 import { connectWithSSO } from "../../zksyncSSO";
 import styles from "@styles/pages/Login.module.scss";
-import { useAccount, useDisconnect } from "wagmi";
+import { useAccount } from "wagmi";
 import { useRouter } from "next/router";
 import Typography from "@components/ui/Typography/Typography";
-
+import Image from "next/image";
+import piggy from "@public/images/piggy.png";
+import bgLogin from "@public/images/bg-login.png";
 const LogInPage = () => {
-  const { address, isConnected } = useAccount();
-  const { disconnect } = useDisconnect();
+  const { isConnected } = useAccount();
 
   const [isConnecting, setIsConnecting] = React.useState<boolean>(false);
   const [error, setError] = React.useState<string | null>(null);
+
   const router = useRouter();
   const handleConnectWithSSO = async () => {
     try {
       setIsConnecting(true);
       await connectWithSSO();
-
-      router.push("/home");
     } catch (error) {
       console.error(error);
       setError("Error connecting with SSO");
@@ -27,30 +27,58 @@ const LogInPage = () => {
     }
   };
 
-  useEffect(() => {
-    console.log(address);
-    console.log(isConnected);
-    if (isConnected && typeof window !== "undefined") {
-      router.push("/home");
-    }
-  }, [address]);
-
   return (
     <div className={styles.container}>
-      {isConnecting && <div>Connecting...</div>}
-      {!isConnecting && (
-        <>
-          <Button
-            text={"LOGIN"}
-            type={"blue"}
-            size={"small"}
-            onClick={() => handleConnectWithSSO()}
-          />
-
-          <Button text={"LOGOUT"} type={"blue"} size={"small"} onClick={() => disconnect()} />
-        </>
-      )}
-      {error && <Typography text={error} type={"subtext"} color="error" />}
+      <>
+        <div className={styles.header}>
+          <Image src={piggy} alt={"piggy"} className={styles.image} />
+          <Image src={bgLogin} alt={"bg-1"} className={styles.bg} />
+          <Image src={bgLogin} alt={"bg-2"} className={styles.bg2} />
+        </div>
+        <div className={styles.footer}>
+          {!isConnected && (
+            <>
+              <div className={styles.textContainer}>
+                <Typography text={"Welcome to Piggy Trivia"} type={"h0"} alignSelf="center" />
+                <Typography
+                  text={"Manage savings, invest wisely, and grow together as a family."}
+                  type={"subtext"}
+                  alignSelf="center"
+                />
+              </div>
+              <Button
+                text={isConnecting ? "Connecting..." : "Let's Play!"}
+                type={"blue"}
+                size={"main"}
+                disabled={isConnecting}
+                onClick={() => handleConnectWithSSO()}
+              />
+              {error && <Typography text={error} type={"subtext"} color="error" />}
+            </>
+          )}
+          {isConnected && (
+            <>
+              <div className={styles.textContainer}>
+                <Typography text={"All setup!"} type={"h0"} alignSelf="center" />
+                <Typography
+                  text={
+                    "Let’s start growing your savings, earning rewards, and becoming a money master!"
+                  }
+                  type={"subtext"}
+                  alignSelf="center"
+                />
+              </div>
+              <Button
+                text={"Lets GO!"}
+                type={"blue"}
+                size={"main"}
+                onClick={() => router.push("/home")}
+              />
+              {error && <Typography text={error} type={"subtext"} color="error" />}
+            </>
+          )}
+        </div>
+      </>
     </div>
   );
 };

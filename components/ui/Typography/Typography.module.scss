@@ -33,9 +33,9 @@
 }
 
 .subText {
-  @include toRem(font-size, 12);
+  @include toRem(font-size, 16);
   @include toRem(line-height, 18);
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .subTextBold {
@@ -53,7 +53,7 @@
   @include toRem(font-size, 58);
   @include toRem(line-height, 70);
 
-  @include respond-to(lg) {
+  @include respond-to(sm) {
     @include toRem(font-size, 96);
     @include toRem(line-height, 96);
     font-weight: 800;
