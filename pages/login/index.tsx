@@ -31,6 +31,9 @@ const LogInPage = () => {
   useEffect(() => {
     console.log(address);
     console.log(isConnected);
+    if (isConnected && typeof window !== "undefined") {
+      router.push("/home");
+    }
   }, [address]);
 
   return (
