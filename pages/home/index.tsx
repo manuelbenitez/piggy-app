@@ -8,14 +8,14 @@ import useGetQuestionsByLevel from "../../hooks/useGetQuestionsByLevel";
 import Confetti from "react-confetti";
 import Lottie from "lottie-react";
 import chestAnimation from "@public/animations/chest-animation.json";
-import { useEthersProvider } from "../../hooks/useEthersProvider";
+// import { useEthersProvider } from "../../hooks/useEthersProvider";
 
 export default function Home() {
   const [selected, setSelected] = useState<number>(-1);
   const { question, isFetchingQuestions } = useGetQuestionsByLevel(1);
   const [correct, setCorrect] = useState<boolean | null>(null);
   const [reveal, setReveal] = useState<boolean>(false);
-  const provider = useEthersProvider();
+  // const provider = useEthersProvider();
 
   const handleResponse = async () => {
     setReveal(true);
@@ -25,7 +25,7 @@ export default function Home() {
       setCorrect(true);
 
       console.log("connecting paymaster");
-      console.log(await provider?.getNetwork());
+      // console.log(await provider?.getNetwork());
       console.log("minting NFT...");
 
       console.log("NFT minted");
