@@ -23,8 +23,9 @@ const ProfilePage = () => {
       <Typography
         text={truncateAddress(address!)}
         type={"h4"}
-        onClick={() =>
-          window.open(`${zksyncSepoliaTestnet.blockExplorers.default.url}address/` + address)
+        onClick={
+          () => {}
+          // window.open(`${zksyncSepoliaTestnet.blockExplorers.default.url}address/` + address)
         }
       />
 
