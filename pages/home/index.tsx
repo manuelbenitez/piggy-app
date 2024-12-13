@@ -15,6 +15,7 @@ export default function Home() {
   const [correct, setCorrect] = useState<boolean | null>(null);
   const [reveal, setReveal] = useState<boolean>(false);
   const provider = useEthersProvider();
+
   const handleResponse = async () => {
     setReveal(true);
     if (selected + 1 === question?.correctAnswer) {

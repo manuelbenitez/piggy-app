@@ -23,10 +23,11 @@ const ProfilePage = () => {
       <Typography
         text={truncateAddress(address!)}
         type={"h4"}
-        onClick={
-          () => {}
-          // window.open(`${zksyncSepoliaTestnet.blockExplorers.default.url}address/` + address)
-        }
+        onClick={() => {
+          if (typeof window !== undefined) {
+            window.open(`${zksyncSepoliaTestnet.blockExplorers.default.url}address/` + address);
+          }
+        }}
       />
 
       <Button
