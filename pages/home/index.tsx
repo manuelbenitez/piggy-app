@@ -6,18 +6,23 @@ import { useState } from "react";
 import useGetQuestionsByLevel from "../../hooks/useGetQuestionsByLevel";
 import Button from "@components/ui/Button/Button";
 import Confetti from "react-confetti";
-
+import Lottie from "lottie-react";
+import chestAnimation from "@public/animations/chest-animation.json";
+import { useEthersProvider } from "../../hooks/useEthersProvider";
 export default function Home() {
   const [selected, setSelected] = useState<number>(-1);
   const { question, isFetchingQuestions } = useGetQuestionsByLevel(1);
   const [correct, setCorrect] = useState<boolean | null>(null);
   const [reveal, setReveal] = useState<boolean>(false);
-  const handleResponse = () => {
+  const provider = useEthersProvider();
+  const handleResponse = async () => {
     setReveal(true);
     if (selected + 1 === question?.correctAnswer) {
       console.log("Correct");
       setCorrect(true);
 
+      console.log("connecting paymaster");
+      console.log(await provider?.getNetwork());
       console.log("minting NFT...");
 
       console.log("NFT minted");
@@ -33,7 +38,7 @@ export default function Home() {
     <div className={styles.container}>
       <div className={styles.quizContainer}>
         <div className={styles.quizItemContainer}>
-          {!isFetchingQuestions && question && (
+          {!isFetchingQuestions && question && !correct && (
             <>
               <Typography text={question.question} type={"h1"} />
               {question.answers.map((answer, index) => (
@@ -55,15 +60,16 @@ export default function Home() {
                   <Typography text={answer.answer} type={"h4"} />
                 </div>
               ))}
+              <Button
+                text={"Responder"}
+                type={"blue"}
+                size={"small"}
+                onClick={() => handleResponse()}
+              />
             </>
           )}
           {correct && <Confetti gravity={0.1} friction={0.97} />}
-          <Button
-            text={"Responder"}
-            type={"blue"}
-            size={"small"}
-            onClick={() => handleResponse()}
-          />
+          {correct && <Lottie animationData={chestAnimation} />}
         </div>
       </div>
       <BottomNavigationMenu />

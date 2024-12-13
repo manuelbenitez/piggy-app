@@ -18,7 +18,6 @@ const LogInPage = () => {
       setIsConnecting(true);
       await connectWithSSO();
 
-      console.log(address);
       router.push("/home");
     } catch (error) {
       console.error(error);
