@@ -1,14 +1,15 @@
+import { useState } from "react";
 import BottomNavigationMenu from "@components/fragments/BottomNavigationBar/BottomNavigationMenu";
 import Typography from "@components/ui/Typography/Typography";
 import styles from "@styles/pages/Home.module.scss";
 import classNames from "classnames";
-import { useState } from "react";
-import useGetQuestionsByLevel from "../../hooks/useGetQuestionsByLevel";
 import Button from "@components/ui/Button/Button";
+import useGetQuestionsByLevel from "../../hooks/useGetQuestionsByLevel";
 import Confetti from "react-confetti";
 import Lottie from "lottie-react";
 import chestAnimation from "@public/animations/chest-animation.json";
 import { useEthersProvider } from "../../hooks/useEthersProvider";
+
 export default function Home() {
   const [selected, setSelected] = useState<number>(-1);
   const { question, isFetchingQuestions } = useGetQuestionsByLevel(1);
@@ -18,6 +19,7 @@ export default function Home() {
 
   const handleResponse = async () => {
     setReveal(true);
+    if (!question) return;
     if (selected + 1 === question?.correctAnswer) {
       console.log("Correct");
       setCorrect(true);
