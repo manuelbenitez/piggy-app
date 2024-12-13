@@ -1,29 +1,28 @@
-@use "../../../styles/mixins" as *;
 
 .button {
   display: flex;
   justify-content: center;
   align-items: center;
-  @include toRem(gap, 10);
+  gap: 10px;
 
   width: 100%;
 
   color: white;
 
-  @include toRem(padding-top, 10);
-  @include toRem(padding-bottom, 10);
-  @include toRem(padding-left, 20);
-  @include toRem(padding-right, 20);
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
 
-  @include toRem(border-radius, 6);
+  border-radius: 6px;
 
   white-space: nowrap;
 
   transition: 0.2s ease-in-out;
 
-  @include toRem(font-size, 14);
-  @include toRem(line-height, 14);
-  @include toRem(letter-spacing, 0.16);
+  font-size: 14px;
+  line-height: 14px;
+  letter-spacing: 0.16px;
   font-weight: 600;
 
   &:disabled {
@@ -44,13 +43,13 @@
 }
 
 .main {
-  @include toRem(padding-top, 20);
-  @include toRem(padding-bottom, 20);
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 .small {
-  @include toRem(padding-top, 8);
-  @include toRem(padding-bottom, 8);
+  padding-top: 8px;
+  padding-bottom: 8px;
 }
 
 .blue {

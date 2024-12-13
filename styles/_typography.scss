@@ -1,62 +1,62 @@
 h1 {
-  @include toRem(font-size, 20);
-  @include toRem(line-height, 20);
+  font-size: 20px;
+  line-height: 20px;
   font-weight: 800;
 
-  @include respond-to(sm) {
-    @include toRem(font-size, 32);
-    @include toRem(line-height, 32);
-  }
+  // @include respond-to(sm) {
+  //   font-size: 32px;
+  //   line-height: 32px;
+  // }
 }
 
 h2 {
-  @include toRem(font-size, 18);
-  @include toRem(line-height, 18);
-  @include toRem(letter-spacing, 0.48);
+  font-size: 18px;
+  line-height: 18px;
+  letter-spacing: 0.48px;
   font-weight: 800;
 
-  @include respond-to(sm) {
-    @include toRem(font-size, 24);
-    @include toRem(line-height, 24);
-  }
+  // @include respond-to(sm) {
+  //   font-size: 24px;
+  //   line-height: 24px;
+  // }
 }
 
 h3 {
-  @include toRem(font-size, 18);
-  @include toRem(line-height, 23);
-  @include toRem(letter-spacing, 0.36);
+  font-size: 18px;
+  line-height: 23px;
+  letter-spacing: 0.36px;
   font-weight: 800;
 }
 
 h4 {
-  @include toRem(font-size, 16);
-  @include toRem(line-height, 20);
-  @include toRem(letter-spacing, 0.32);
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 0.32px;
   font-weight: 600;
 }
 
 h5 {
-  @include toRem(font-size, 14);
-  @include toRem(line-height, 16);
-  @include toRem(letter-spacing, 0.28);
+  font-size: 14px;
+  line-height: 16px;
+  letter-spacing: 0.28px;
   font-weight: 600;
 }
 
 h6 {
-  @include toRem(font-size, 12);
-  @include toRem(line-height, 12);
-  @include toRem(letter-spacing, 0.24);
+  font-size: 12px;
+  line-height: 12px;
+  letter-spacing: 0.24px;
   font-weight: 600;
 }
 
 p {
-  @include toRem(font-size, 14);
-  @include toRem(line-height, 18);
+  font-size: 14px;
+  line-height: 18px;
   font-weight: 500;
-  
-  @include respond-to(md) {
-    @include toRem(font-size, 16);
-    @include toRem(line-height, 24);
-    font-weight: 500;
-  }
+
+  // @include respond-to(md) {
+  //   font-size: 16px;
+  //   line-height: 24px;
+  //   font-weight: 500;
+  // }
 }
