@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Typography from "@components/ui/Typography/Typography";
 import styles from "@styles/pages/Home.module.scss";
 import classNames from "classnames";
@@ -35,6 +35,14 @@ export default function Home() {
       console.log("Incorrect");
     }
   };
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      console.log("window is defined");
+    }
+  }, []);
+
+  if (typeof window !== "undefined") return;
 
   return (
     <div className={styles.container}>
