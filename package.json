@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "typechain": "typechain --target ethers-v6 --out-dir public/types 'public/abis/*.json'"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.62.7",
@@ -25,11 +26,13 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@typechain/ethers-v6": "^0.5.1",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.1.0",
-    "typescript": "^5"
+    "typechain": "^8.3.2",
+    "typescript": "^5.7.2"
   }
 }
