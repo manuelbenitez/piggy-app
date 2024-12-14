@@ -8,6 +8,8 @@ import Typography from "@components/ui/Typography/Typography";
 import Image from "next/image";
 import piggy from "@public/images/piggy.png";
 import bgLogin from "@public/images/bg-login.png";
+import axios from "axios";
+import { API_ENDPOINT } from "../../service/api.constants";
 const LogInPage = () => {
   const { isConnected } = useAccount();
 
@@ -18,7 +20,12 @@ const LogInPage = () => {
   const handleConnectWithSSO = async () => {
     try {
       setIsConnecting(true);
-      await connectWithSSO();
+      const { accounts } = await connectWithSSO();
+      const { data } = await axios.post(API_ENDPOINT + "login", {
+        wallet: accounts[0],
+      });
+
+      localStorage.setItem("token", data.token);
     } catch (error) {
       console.error(error);
       setError("Error connecting with SSO");

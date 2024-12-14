@@ -56,10 +56,12 @@ export const wagmiConfig = createConfig({
 });
 
 export const connectWithSSO = async () => {
-  await connect(wagmiConfig, {
+  const { accounts, chainId } = await connect(wagmiConfig, {
     connector: ssoConnector,
     chainId: zksyncSepoliaTestnet.id, // or another chain id that has SSO support
   });
+
+  return { accounts, chainId };
 
   //   const balance = await getBalance(wagmiConfig)
 };
