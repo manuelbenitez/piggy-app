@@ -15,7 +15,7 @@ export default function Home() {
   const [correct, setCorrect] = useState<boolean | null>(null);
   const [reveal, setReveal] = useState<boolean>(false);
 
-  const { question, isFetchingQuestions } = useGetQuestionsByLevel(1);
+  const { question, isFetchingQuestions } = useGetQuestionsByLevel();
   const provider = useEthersProvider();
 
   const handleResponse = async () => {

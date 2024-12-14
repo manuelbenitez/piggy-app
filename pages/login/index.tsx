@@ -26,6 +26,14 @@ const LogInPage = () => {
       });
 
       localStorage.setItem("token", data.token);
+
+      const response = await axios.get(API_ENDPOINT + "user", {
+        headers: {
+          Authorization: `Bearer ${data.token}`,
+        },
+      });
+
+      localStorage.setItem("level", response.data.level);
     } catch (error) {
       console.error(error);
       setError("Error connecting with SSO");

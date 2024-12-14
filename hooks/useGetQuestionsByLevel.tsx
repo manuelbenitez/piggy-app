@@ -1,6 +1,8 @@
+import axios from "axios";
 import React, { useEffect } from "react";
+import { API_ENDPOINT } from "../service/api.constants";
 
-const useGetQuestionsByLevel = (level: number) => {
+const useGetQuestionsByLevel = () => {
   const [isFetchingQuestions, setIsFetchingQuestions] = React.useState<boolean>(false);
   const [question, setQuestion] = React.useState<Question | undefined>(undefined);
 
@@ -8,19 +10,18 @@ const useGetQuestionsByLevel = (level: number) => {
     try {
       setIsFetchingQuestions(true);
 
-      setQuestion({
-        id: 1,
-        question: "¿Para qué sirve el dinero?",
-        answers: [
-          { id: 1, answer: "Para construir castillos mágicos." },
-          { id: 2, answer: "Para comprar cosas que necesitamos o queremos." },
-          { id: 3, answer: "Para decorar nuestra casa." },
-          { id: 4, answer: "Para jugar con él como si fuera un juguete." },
-          { id: 5, answer: "Para hacer trucos de magia." },
-        ],
-        correctAnswer: 2,
-        level: 1,
+      const level = localStorage.getItem("level");
+      const token = localStorage.getItem("token");
+
+      const nextLevel = Number(level) + 1;
+
+      const { data } = await axios.get(API_ENDPOINT + `levels/${nextLevel}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       });
+
+      setQuestion({ ...data.questions[0] });
     } catch (e) {
       console.error(e);
     } finally {
@@ -30,7 +31,7 @@ const useGetQuestionsByLevel = (level: number) => {
 
   useEffect(() => {
     fetchQuestions();
-  }, [level]);
+  }, []);
   return {
     isFetchingQuestions,
     question,
