@@ -4,14 +4,17 @@ import styles from "@styles/pages/Home.module.scss";
 import classNames from "classnames";
 import Button from "@components/ui/Button/Button";
 import useGetQuestionsByLevel from "../../hooks/useGetQuestionsByLevel";
-import Lottie from "lottie-react";
 import chestAnimation from "@public/animations/chest-animation.json";
 import { useEthersProvider } from "../../hooks/useEthersProvider";
+import dynamic from "next/dynamic";
+
+const Lottie = dynamic(() => import("lottie-react"), { ssr: false });
 
 export default function Home() {
   const [selected, setSelected] = useState<number>(-1);
   const [correct, setCorrect] = useState<boolean | null>(null);
   const [reveal, setReveal] = useState<boolean>(false);
+
   const { question, isFetchingQuestions } = useGetQuestionsByLevel(1);
   const provider = useEthersProvider();
 
@@ -70,7 +73,6 @@ export default function Home() {
               />
             </>
           )}
-          {/* {correct && <Confetti gravity={0.1} friction={0.97} />} */}
           {correct && <Lottie animationData={chestAnimation} />}
         </div>
       </div>
