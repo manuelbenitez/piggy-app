@@ -4,7 +4,6 @@ import styles from "@styles/pages/Home.module.scss";
 import classNames from "classnames";
 import Button from "@components/ui/Button/Button";
 import useGetQuestionsByLevel from "../../hooks/useGetQuestionsByLevel";
-// import Confetti from "react-confetti";
 import Lottie from "lottie-react";
 import chestAnimation from "@public/animations/chest-animation.json";
 import { useEthersProvider } from "../../hooks/useEthersProvider";
