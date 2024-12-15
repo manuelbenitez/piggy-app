@@ -13,6 +13,7 @@
     "@tanstack/react-query": "^5.62.7",
     "axios": "^1.7.9",
     "classnames": "^2.5.1",
+    "@web3modal/wagmi": "^4.1.7",
     "ethers": "^6.13.4",
     "lottie-react": "^2.4.0",
     "next": "15.1.0",
@@ -20,9 +21,13 @@
     "react-dom": "^19.0.0",
     "react-icons": "^5.4.0",
     "sass": "^1.69.5",
+    "types": "^0.1.1",
     "viem": "^2.21.55",
     "wagmi": "^2.14.1",
-    "zksync-sso": "^0.0.0-beta.7"
+    "web3modal": "^1.9.12",
+    "zksync-ethers": "^6.15.3",
+    "zksync-sso": "^0.0.0-beta.7",
+    "zksync-web3": "^0.17.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

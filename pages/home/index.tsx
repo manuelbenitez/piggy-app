@@ -4,9 +4,10 @@ import styles from "@styles/pages/Home.module.scss";
 import classNames from "classnames";
 import Button from "@components/ui/Button/Button";
 import useGetQuestionsByLevel from "../../hooks/useGetQuestionsByLevel";
-import chestAnimation from "@public/animations/chest-animation.json";
-import { useEthersProvider } from "../../hooks/useEthersProvider";
 import dynamic from "next/dynamic";
+import { useAccount } from "wagmi";
+import axios from "axios";
+import { API_ENDPOINT } from "../../service/api.constants";
 
 const Lottie = dynamic(() => import("lottie-react"), { ssr: false });
 
@@ -14,24 +15,41 @@ export default function Home() {
   const [selected, setSelected] = useState<number>(-1);
   const [correct, setCorrect] = useState<boolean | null>(null);
   const [reveal, setReveal] = useState<boolean>(false);
-
   const { question, isFetchingQuestions } = useGetQuestionsByLevel();
-  const provider = useEthersProvider();
-
+  const { address, chainId } = useAccount();
   const handleResponse = async () => {
     setReveal(true);
-    if (!question) return;
+    if (!question || !chainId || !address) return;
+
+    if (!process.env.NEXT_PUBLIC_PAYMASTER_ADDRESS) {
+      throw new Error("Paymaster address not set in env");
+    }
+
+    if (!process.env.NEXT_PUBLIC_TOKEN_ADDRESS) {
+      throw new Error("Token address not set in env");
+    }
+
     if (selected + 1 === question?.correctAnswer) {
       console.log("Correct");
       setCorrect(true);
 
-      console.log("connecting paymaster");
-      console.log(await provider?.getNetwork());
-      console.log("minting NFT...");
+      try {
+        const response = await axios.post(API_ENDPOINT + `transaction/${address}`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        });
 
-      console.log("NFT minted");
+        console.log(response, "response");
 
-      console.log("redirecting...");
+        await axios.put(API_ENDPOINT + "level", {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        });
+      } catch (e) {
+        console.log(e);
+      }
     } else {
       setCorrect(false);
       console.log("Incorrect");
@@ -73,7 +91,7 @@ export default function Home() {
               />
             </>
           )}
-          {correct && <Lottie animationData={chestAnimation} />}
+          {/* {correct && <Lottie animationData={chestAnimation} />} */}
         </div>
       </div>
     </div>

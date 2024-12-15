@@ -1,7 +1,7 @@
 import { JsonRpcProvider } from "ethers";
 import {
-  LevelBadges,
-  LevelBadges__factory,
+  LevelBadgeNFT,
+  LevelBadgeNFT__factory,
   LevelRewardsClaim,
   LevelRewardsClaim__factory,
   MyERC20,
@@ -14,13 +14,13 @@ import { RPC_ENDPOINT } from "./api.constants";
 export const getLevelBadgesContract = async (
   contractAddress: string,
   chainId: number
-): Promise<LevelBadges> => {
+): Promise<LevelBadgeNFT> => {
   const provider = new JsonRpcProvider(RPC_ENDPOINT, chainId);
 
-  return LevelBadges__factory.connect(contractAddress, provider);
+  return LevelBadgeNFT__factory.connect(contractAddress, provider);
 };
 
-export const levelRewardsClaimContract = async (
+export const getLevelRewardsClaimContract = async (
   contractAddress: string,
   chainId: number
 ): Promise<LevelRewardsClaim> => {
