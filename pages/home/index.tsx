@@ -79,26 +79,39 @@ export default function Home() {
                 </div>
               ))}
               <Button
-                text={correct ? "Continue" : "Submit"}
+                text={"Submit"}
                 type={"blue"}
                 size={"main"}
                 disabled={selected === -1}
                 onClick={() => {
-                  if (correct) {
-                    router.push("/profile");
-                  } else {
-                    handleResponse();
-                  }
+                  handleResponse();
                 }}
               />
             </div>
           </>
         )}
-        {/* {correct && (
+        {correct && (
           <div className={styles.chest}>
+            <Typography
+              text={"Congratulations! You earn a reward!"}
+              type={"h1"}
+              alignSelf="center"
+            />
             <Lottie animationData={chestAnimation} />
+            <Button
+              text={"Continue"}
+              type={"blue"}
+              size={"main"}
+              onClick={() => {
+                if (correct) {
+                  router.push("/profile");
+                } else {
+                  handleResponse();
+                }
+              }}
+            />
           </div>
-        )} */}
+        )}
       </div>
     </div>
   );
