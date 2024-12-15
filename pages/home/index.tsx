@@ -30,13 +30,11 @@ export default function Home() {
       setCorrect(true);
 
       try {
-        const response = await axios.post(API_ENDPOINT + `transaction`, {
-          recipientAddress: address,
-        });
+        const level = localStorage.getItem("level");
 
-        console.log(response, "response");
+        const nextLevel = Number(level) + 1;
 
-        await axios.put(API_ENDPOINT + "level", {
+        await axios.put(API_ENDPOINT + `user/level/${nextLevel}`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
