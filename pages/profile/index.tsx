@@ -2,24 +2,16 @@ import React from "react";
 import styles from "@styles/pages/Profile.module.scss";
 import Typography from "@components/ui/Typography/Typography";
 import Button from "@components/ui/Button/Button";
-import { useAccount, useDisconnect } from "wagmi";
-import { zksyncSepoliaTestnet } from "viem/chains";
+import { useDisconnect } from "wagmi";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import University from "@public/images/uni.png";
 import General from "@public/images/general.png";
 const ProfilePage = () => {
   const { disconnect } = useDisconnect();
-  const { address } = useAccount();
-  const router = useRouter();
-  function truncateAddress(address: string | undefined) {
-    if (!address) return "";
-    return address.slice(0, 6) + "..." + address.slice(-4);
-  }
 
-  // console.log(zksyncSepoliaTestnet.blockExplorers);
-  // console.log(zksyncSepoliaTestnet.rpcUrls.default.http);
-  // console.log(address);
+  const router = useRouter();
+
   return (
     <div className={styles.container}>
       <div className={styles.header}>
