@@ -21,10 +21,12 @@
 }
 
 .buttonText {
-  font-size: 14px;
-  line-height: 14px;
+  font-size: 16px;
+  line-height: 24px;
   letter-spacing: 0.16px;
-  font-weight: 600;
+  font-weight: 700;
+
+  font-family: "Quicksand", sans-serif;
 
   // @include respond-to(sm) {
   //   font-size: 16px;
@@ -50,8 +52,9 @@
 }
 
 .h0 {
-  font-size: 58px;
-  line-height: 70px;
+  font-size: 52px;
+  line-height: 56px;
+  font-weight: 600;
 
   // @include respond-to(sm) {
   //   font-size: 96px;

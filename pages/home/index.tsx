@@ -8,7 +8,8 @@ import dynamic from "next/dynamic";
 import { useAccount } from "wagmi";
 import axios from "axios";
 import { API_ENDPOINT } from "../../service/api.constants";
-
+import chestAnimation from "@public/animations/chest-animation.json";
+import { Router, useRouter } from "next/router";
 const Lottie = dynamic(() => import("lottie-react"), { ssr: false });
 
 export default function Home() {
@@ -17,27 +18,20 @@ export default function Home() {
   const [reveal, setReveal] = useState<boolean>(false);
   const { question, isFetchingQuestions } = useGetQuestionsByLevel();
   const { address, chainId } = useAccount();
+
+  const router = useRouter();
+
   const handleResponse = async () => {
     setReveal(true);
     if (!question || !chainId || !address) return;
-
-    if (!process.env.NEXT_PUBLIC_PAYMASTER_ADDRESS) {
-      throw new Error("Paymaster address not set in env");
-    }
-
-    if (!process.env.NEXT_PUBLIC_TOKEN_ADDRESS) {
-      throw new Error("Token address not set in env");
-    }
 
     if (selected + 1 === question?.correctAnswer) {
       console.log("Correct");
       setCorrect(true);
 
       try {
-        const response = await axios.post(API_ENDPOINT + `transaction/${address}`, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
+        const response = await axios.post(API_ENDPOINT + `transaction`, {
+          recipientAddress: address,
         });
 
         console.log(response, "response");
@@ -59,10 +53,12 @@ export default function Home() {
   return (
     <div className={styles.container}>
       <div className={styles.quizContainer}>
-        <div className={styles.quizItemContainer}>
-          {!isFetchingQuestions && question && !correct && (
-            <>
+        {!isFetchingQuestions && question && (
+          <>
+            <div className={styles.header}>
               <Typography text={question.question} type={"h1"} />
+            </div>
+            <div className={styles.quizItemContainer}>
               {question.answers.map((answer, index) => (
                 <div
                   key={answer.id}
@@ -83,16 +79,26 @@ export default function Home() {
                 </div>
               ))}
               <Button
-                text={"Responder"}
+                text={correct ? "Continue" : "Submit"}
                 type={"blue"}
                 size={"main"}
                 disabled={selected === -1}
-                onClick={() => handleResponse()}
+                onClick={() => {
+                  if (correct) {
+                    router.push("/profile");
+                  } else {
+                    handleResponse();
+                  }
+                }}
               />
-            </>
-          )}
-          {/* {correct && <Lottie animationData={chestAnimation} />} */}
-        </div>
+            </div>
+          </>
+        )}
+        {/* {correct && (
+          <div className={styles.chest}>
+            <Lottie animationData={chestAnimation} />
+          </div>
+        )} */}
       </div>
     </div>
   );
