@@ -34,11 +34,13 @@ export default function Home() {
 
         const nextLevel = Number(level) + 1;
 
-        await axios.put(API_ENDPOINT + `user/level/${nextLevel}`, {
+        const { data } = await axios.put(API_ENDPOINT + `user/level/${nextLevel}`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         });
+
+        localStorage.setItem("level", data.level.toString());
       } catch (e) {
         console.log(e);
       }
