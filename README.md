@@ -62,7 +62,11 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/b
 We couldn't integrate Paymaster from the Frontend because we needed a signer to mint an NFT for the user when they advance a level, so they can claim a reward with that NFT.
 
 **Steps**
+
 1 - User completes a sets of questions and advances to the next level
+
 2 - Automatically an ERC-721 gets minted for the user in the background to keep as a price in their profile.
+
 3 - They can go to their profile to see the rewards and claim them.
+
 4 - When they click Claim Rewards! a Smart Contract checks if they hold an NFT and releases an amount of ERC-20 deposited by their Parent or Tutor.
